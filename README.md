@@ -98,13 +98,10 @@ echo $obj->submit();
 ```
 
 
-For further help, see our documentation on <https://docs.paykun.com>.
+For further help, see our documentation on <https://paykun.com/docs>.
 
 [composer-install]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
 
-## Developing
-
-See the [doc.md](doc.md) file for getting started with development.
 
 ## License
 
