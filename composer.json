@@ -1,0 +1,25 @@
+{
+    "name": "paykun/checkout",
+    "version": "1.0.0",
+    "type": "package",
+    "description": "PayKun Checkout library which can be used to initiate payment",
+    "require": {
+        "php": ">=5.3.0",
+        "twig/twig": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PayKun Payment Solutions Private Limited",
+            "email": "support@paykun.com",
+            "homepage": "https://paykun.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Paykun\\Checkout\\": "src/"
+        }
+    }
+}

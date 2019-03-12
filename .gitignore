@@ -1,0 +1,9 @@
+/vendor/
+non-composer/test.php
+test.php
+.idea/checkout-php.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/vcs.xml
+.idea/workspace.xml
