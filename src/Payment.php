@@ -41,6 +41,12 @@ class Payment {
     private $isPassedValidationForBilling = false;
     private $isCustomRenderer = false;
 
+    public $udf_1;
+    public $udf_2;
+    public $udf_3;
+    public $udf_4;
+    public $udf_5;
+
     /**
      * Payment constructor.
      * @param string $mid           => Id of the Merchant
@@ -264,6 +270,18 @@ class Payment {
     }
 
 
+    public function setCustomFields($fields = null) {
+        if($fields !== null) {
+            $refl = new \ReflectionClass($this);
+            foreach ($fields as $key => $value) {
+                $property = $refl->getProperty($key);
+                if ($property instanceof \ReflectionProperty) {
+                    $property->setValue($this, $value);
+                }
+            }
+        }
+    }
+
     /**
      * @param bool $isCustomRender The is render parameter specifies whethere the user want to use custom form for submit or not
      * By default the default template will be used for rendering
@@ -299,11 +317,11 @@ class Payment {
             $dataArray['billing_state']     = $this->billingState;
             $dataArray['billing_country']   = $this->billingCountry;
             $dataArray['billing_zip']       = $this->billingPinCode;
-            $dataArray['udf_1']             = '';
-            $dataArray['udf_2']             = '';
-            $dataArray['udf_3']             = '';
-            $dataArray['udf_4']             = '';
-            $dataArray['udf_5']             = '';
+            $dataArray['udf_1']             = $this->udf_1 ? $this->udf_1 : '';
+            $dataArray['udf_2']             = $this->udf_2 ? $this->udf_2 : '';
+            $dataArray['udf_3']             = $this->udf_3 ? $this->udf_3 : '';
+            $dataArray['udf_4']             = $this->udf_4 ? $this->udf_4 : '';
+            $dataArray['udf_5']             = $this->udf_5 ? $this->udf_5 : '';
 
             $encryptedData = $this->encryptData($dataArray);
             return $this->createForm($encryptedData);
