@@ -89,7 +89,7 @@ echo $obj->submit();
 
 /* Check for transaction status
  * Once your success or failed url called then create an instance of Payment same as above and then call getTransactionInfo like below
- *  $obj = new Payment('merchantUId', 'accessToken', 'encryptionKey');
+ *  $obj = new Payment('merchantUId', 'accessToken', 'encryptionKey', true, true); //Second last false if sandbox mode
  *  $transactionData = $obj->getTransactionInfo(Get payment-id from the success or failed url);
  *  Process $transactionData as per your requirement
  *

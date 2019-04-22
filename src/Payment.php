@@ -58,10 +58,10 @@ class Payment {
 
     public function __construct($mid, $accessToken, $encKey, $isLive = true, $isCustomTemplate = false) {
 
-        if (Validator::VALIDATE_MERCHANT_ID($mid)) {
+        /*if (Validator::VALIDATE_MERCHANT_ID($mid)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_MERCHANT_ID_STRING,
                 ErrorCodes::INVALID_MERCHANT_ID_CODE, null);
-        }
+        }*/
 
         if (Validator::VALIDATE_ACCESS_TOKEN($accessToken)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_ACCESS_TOKEN_STRING,
@@ -188,7 +188,7 @@ class Payment {
 
     public function addShippingAddress($country, $state, $city, $pinCode, $addressString) {
         $errorPrefix = "Shipping ";
-        if(! Validator::VALIDATE_COMMON_FIELD($country)) {
+        /*if(! Validator::VALIDATE_COMMON_FIELD($country)) {
             throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_COUNTRY_NAME_STRING,
                 ErrorCodes::INVALID_COUNTRY_NAME_CODE, null);
         }
@@ -211,7 +211,7 @@ class Payment {
         if(! Validator::VALIDATE_ADDRESS_FIELD($addressString)) {
             throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_ADDRESS_STRING,
                 ErrorCodes::INVALID_ADDRESS_CODE, null);
-        }
+        }*/
 
         $this->country          = $country;
         $this->state            = $state;
@@ -235,7 +235,7 @@ class Payment {
     public function addBillingAddress($country, $state, $city, $pinCode, $addressString) {
 
         $errorPrefix = "Billing ";
-        if(! Validator::VALIDATE_COMMON_FIELD($country)) {
+        /*if(! Validator::VALIDATE_COMMON_FIELD($country)) {
             throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_COUNTRY_NAME_STRING,
                 ErrorCodes::INVALID_COUNTRY_NAME_CODE, null);
         }
@@ -250,7 +250,7 @@ class Payment {
                 ErrorCodes::INVALID_CITY_NAME_CODE, null);
         }
 
-        if(! Validator::VALIDATE_PINCODE($pinCode)) {
+        if(! Valida::VALIDATE_PINCODE($pinCode)) {
             throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_POSTAL_CODE_STRING,
                 ErrorCodes::INVALID_POSTAL_CODE_CODE, null);
         }
@@ -258,7 +258,7 @@ class Payment {
         if(! Validator::VALIDATE_ADDRESS_FIELD($addressString)) {
             throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_ADDRESS_STRING,
                 ErrorCodes::INVALID_ADDRESS_CODE, null);
-        }
+        }*/
 
         $this->billingCountry   = $country;
         $this->billingState     = $state;
@@ -456,7 +456,12 @@ class Payment {
 
         try {
 
-            $cUrl        = 'https://api.paykun.com/v1/merchant/transaction/' . $paymentId . '/';
+            if($this->isLive == true) {
+                $cUrl        = 'https://api.paykun.com/v1/merchant/transaction/' . $paymentId . '/';
+            } else {
+                $cUrl        = 'https://sandbox.paykun.com/api/v1/merchant/transaction/' . $paymentId . '/';
+            }
+
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $cUrl);
