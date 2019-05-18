@@ -7,7 +7,7 @@ use Paykun\Checkout\Validator;
 use Paykun\Checkout\Errors\ErrorCodes;
 use Paykun\Checkout\Errors\ValidationException;
 require_once ('Errors/ErrorCodes.php');
-require_once ('../src/Errors/ValidationException.php');
+require_once ('Errors/ValidationException.php');
 class Payment {
 
     const GATEWAY_URL_PROD = "https://checkout.paykun.com/payment";
@@ -418,6 +418,9 @@ class Payment {
      * This function will be used by non-composer users, as they are not using twig or other template parser
      */
     public function prepareCustomFormTemplate ($formData) {
+        /*echo "<pre>";
+        print_r($formData);
+        exit;*/
 
         $htmlEntity = '
             <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
