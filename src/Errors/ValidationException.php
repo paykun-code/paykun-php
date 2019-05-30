@@ -7,11 +7,11 @@ class ValidationException extends Error
     protected $field = null;
 
     public function __construct($message, $code, $field = null)
-    {
-        parent::__construct($message, $code);
+{
+    parent::__construct($message, $code);
 
-        $this->field = $field;
-    }
+    $this->field = $field;
+}
 
     public function getField()
     {

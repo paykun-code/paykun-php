@@ -58,10 +58,10 @@ class Payment {
 
     public function __construct($mid, $accessToken, $encKey, $isLive = true, $isCustomTemplate = false) {
 
-        /*if (Validator::VALIDATE_MERCHANT_ID($mid)) {
+        if (Validator::VALIDATE_MERCHANT_ID($mid)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_MERCHANT_ID_STRING,
                 ErrorCodes::INVALID_MERCHANT_ID_CODE, null);
-        }*/
+        }
 
         if (Validator::VALIDATE_ACCESS_TOKEN($accessToken)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_ACCESS_TOKEN_STRING,
@@ -117,22 +117,6 @@ class Payment {
                 ErrorCodes::INVALID_AMOUNT_CODE, null);
         }
 
-        if (Validator::VALIDATE_URL($successUrl)) {
-            throw new Errors\ValidationException(ErrorCodes::INVALID_SUCCESS_URL_STRING,
-                ErrorCodes::INVALID_SUCCESS_URL_CODE, null);
-        }
-
-        if (Validator::VALIDATE_URL($successUrl)) {
-            throw new Errors\ValidationException(ErrorCodes::INVALID_SUCCESS_URL_STRING,
-                ErrorCodes::INVALID_SUCCESS_URL_CODE, null);
-        }
-
-
-        if (Validator::VALIDATE_URL($failureUrl)) {
-            throw new Errors\ValidationException(ErrorCodes::INVALID_FAIL_URL_STRING,
-                ErrorCodes::INVALID_FAIL_URL_CODE, null);
-        }
-
         $this->orderId      = $orderId;
         $this->purpose      = $purpose;
         $this->amount       = $amount;
@@ -154,21 +138,6 @@ class Payment {
 
     public function addCustomer($customerName, $customerEmail, $customerMoNo) {
 
-        if(Validator::VALIDATE_CUSTOMER_NAME($customerName)) {
-            $errorDetail = Validator::VALIDATE_CUSTOMER_NAME($customerName);
-            throw new Errors\ValidationException($errorDetail["message"], $errorDetail["code"], null);
-        }
-
-        if(Validator::VALIDATE_CUSTOMER_EMAIL($customerEmail)) {
-            $errorDetail = Validator::VALIDATE_CUSTOMER_EMAIL($customerEmail);
-            throw new Errors\ValidationException($errorDetail["message"], $errorDetail["code"], null);
-        }
-
-        if (Validator::VALIDATE_MOBILE_NO($customerMoNo)) {
-            throw new Errors\ValidationException(ErrorCodes::INVALID_MOBILE_NO_STRING,
-                ErrorCodes::INVALID_MOBILE_NO_CODE, null);
-        }
-
         $this->customerName     = $customerName;
         $this->customerEmail    = $customerEmail;
         $this->customerMoNo     = $customerMoNo;
@@ -187,31 +156,6 @@ class Payment {
      */
 
     public function addShippingAddress($country, $state, $city, $pinCode, $addressString) {
-        $errorPrefix = "Shipping ";
-        /*if(! Validator::VALIDATE_COMMON_FIELD($country)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_COUNTRY_NAME_STRING,
-                ErrorCodes::INVALID_COUNTRY_NAME_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_COMMON_FIELD($state)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_STATE_NAME_STRING,
-                ErrorCodes::INVALID_STATE_NAME_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_COMMON_FIELD($city)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_CITY_NAME_STRING,
-                ErrorCodes::INVALID_CITY_NAME_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_PINCODE($pinCode)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_POSTAL_CODE_STRING,
-                ErrorCodes::INVALID_POSTAL_CODE_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_ADDRESS_FIELD($addressString)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_ADDRESS_STRING,
-                ErrorCodes::INVALID_ADDRESS_CODE, null);
-        }*/
 
         $this->country          = $country;
         $this->state            = $state;
@@ -233,32 +177,6 @@ class Payment {
      */
 
     public function addBillingAddress($country, $state, $city, $pinCode, $addressString) {
-
-        $errorPrefix = "Billing ";
-        /*if(! Validator::VALIDATE_COMMON_FIELD($country)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_COUNTRY_NAME_STRING,
-                ErrorCodes::INVALID_COUNTRY_NAME_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_COMMON_FIELD($state)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_STATE_NAME_STRING,
-                ErrorCodes::INVALID_STATE_NAME_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_COMMON_FIELD($city)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_CITY_NAME_STRING,
-                ErrorCodes::INVALID_CITY_NAME_CODE, null);
-        }
-
-        if(! Valida::VALIDATE_PINCODE($pinCode)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_POSTAL_CODE_STRING,
-                ErrorCodes::INVALID_POSTAL_CODE_CODE, null);
-        }
-
-        if(! Validator::VALIDATE_ADDRESS_FIELD($addressString)) {
-            throw new Errors\ValidationException($errorPrefix . ErrorCodes::INVALID_ADDRESS_STRING,
-                ErrorCodes::INVALID_ADDRESS_CODE, null);
-        }*/
 
         $this->billingCountry   = $country;
         $this->billingState     = $state;
