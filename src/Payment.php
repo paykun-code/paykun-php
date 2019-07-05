@@ -390,7 +390,11 @@ class Payment {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array("MerchantId:$this->merchantId", "AccessToken:$this->accessToken"));
-
+            if( isset($_SERVER['HTTPS'] ) ) {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, TRUE);
+            } else {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            }
             $response       = curl_exec($ch);
             $error_number   = curl_errno($ch);
             $error_message  = curl_error($ch);
