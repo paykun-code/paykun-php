@@ -25,24 +25,27 @@ $address        = $_POST['address'];
  *  isCustomTemplate => Set true for non composer projects, will disable twig template
  */
 
-$obj = new \Paykun\Checkout\Payment('<merchantId>', '<accessToken>', '<encryptionKey>', true, true);
+$obj = new \Paykun\Checkout\Payment('596106798717232', 'A169D00759619A7245D563A5EBE0B95B', '327000B0FC13F8C85BD1F74E926C015C', true, true);
 
 $successUrl = str_replace("request.php", "success", $_SERVER['HTTP_REFERER']);
 $failUrl 	= str_replace("request.php", "failed", $_SERVER['HTTP_REFERER']);
 
 // Initializing Order
-$obj->initOrder(generateByMicrotime(), $product_name,  $amount, $successUrl,  $failUrl);
+$obj->initOrder(generateByMicrotime(), $product_name,  $amount, $successUrl,  $failUrl, 'USD');
 
 // Add Customer
-$obj->addCustomer($fname, $email, $contact);
+$obj->addCustomer('Testing', 'test@gmail.com', '9999999999');
 
 // Add Shipping address
-$obj->addShippingAddress('india', $state, $city, $postalcode, $address);
+$obj->addShippingAddress('', '', '', '', '');
 
+$obj->addBillingAddress('', '', '', '', '');
 // Add Billing Address
-$obj->addBillingAddress('india', $state, $city, $postalcode, $address);
+
 //Enable if require custom fields
-$obj->setCustomFields(array('udf_1' => 'Test 1', 'udf_2' => 'Test 2', 'udf_3' => 'Test 3', 'udf_4' => 'Test 4', 'udf_5' => 'Test '));
+$obj->setCustomFields(array('udf_1' => 'Some Dummy text'));
+//echo "<pre>";
+//print_r($obj);exit;
 //Render template and submit the form
 echo $obj->submit();
 

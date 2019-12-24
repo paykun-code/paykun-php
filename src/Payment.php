@@ -10,7 +10,7 @@ require_once ('Errors/ErrorCodes.php');
 require_once ('Errors/ValidationException.php');
 class Payment {
 
-    const GATEWAY_URL_PROD = "https://checkout.paykun.com/payment";
+    const GATEWAY_URL_PROD = "https://checkout2.paykun.com/payment";
     const GATEWAY_URL_DEV = "https://sandbox.paykun.com/payment";
     const PAGE_TITLE = "Processing Payment...";
 
@@ -40,7 +40,7 @@ class Payment {
     private $isPassedValidationForShipping = false;
     private $isPassedValidationForBilling = false;
     private $isCustomRenderer = false;
-
+    private $currency = 'INR';
     public $udf_1;
     public $udf_2;
     public $udf_3;
@@ -58,10 +58,10 @@ class Payment {
 
     public function __construct($mid, $accessToken, $encKey, $isLive = true, $isCustomTemplate = false) {
 
-        if (Validator::VALIDATE_MERCHANT_ID($mid)) {
-            throw new Errors\ValidationException(ErrorCodes::INVALID_MERCHANT_ID_STRING,
-                ErrorCodes::INVALID_MERCHANT_ID_CODE, null);
-        }
+//        if (Validator::VALIDATE_MERCHANT_ID($mid)) {
+//            throw new Errors\ValidationException(ErrorCodes::INVALID_MERCHANT_ID_STRING,
+//                ErrorCodes::INVALID_MERCHANT_ID_CODE, null);
+//        }
 
         if (Validator::VALIDATE_ACCESS_TOKEN($accessToken)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_ACCESS_TOKEN_STRING,
@@ -100,7 +100,7 @@ class Payment {
      */
 
 
-    public function initOrder ($orderId, $purpose, $amount, $successUrl, $failureUrl) {
+    public function initOrder ($orderId, $purpose, $amount, $successUrl, $failureUrl, $currency = 'INR') {
 
         if (Validator::VALIDATE_ORDER_NUMBER($orderId)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_ORDER_ID_STRING,
@@ -123,6 +123,7 @@ class Payment {
         $this->successUrl   = $successUrl;
         $this->failureUrl   = $failureUrl;
         $this->isPassedValidationForInitOrder = true;
+        $this->currency = $currency;
         return $this;
 
     }
@@ -240,7 +241,7 @@ class Payment {
             $dataArray['udf_3']             = $this->udf_3 ? $this->udf_3 : '';
             $dataArray['udf_4']             = $this->udf_4 ? $this->udf_4 : '';
             $dataArray['udf_5']             = $this->udf_5 ? $this->udf_5 : '';
-
+            $dataArray['currency']          = $this->currency;
             $encryptedData = $this->encryptData($dataArray);
             return $this->createForm($encryptedData);
 

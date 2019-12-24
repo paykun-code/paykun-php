@@ -9,7 +9,7 @@
 composer require paykun/checkout
 ```
 
-- If you are not using composer, download the latest release from [the releases section](https://github.com/paykun-code/checkout-php/releases).
+- If you are not using composer, download the latest release from [the releases section](https://github.com/paykun-code/paykun-php/releases/).
 **You should download the `Source code.zip` file**.
 After that include `Payment.php` in your application and you can use the API as usual.
 
