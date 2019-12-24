@@ -25,7 +25,7 @@ $address        = $_POST['address'];
  *  isCustomTemplate => Set true for non composer projects, will disable twig template
  */
 
-$obj = new \Paykun\Checkout\Payment('596106798717232', 'A169D00759619A7245D563A5EBE0B95B', '327000B0FC13F8C85BD1F74E926C015C', true, true);
+$obj = new \Paykun\Checkout\Payment('<merchantId>', '<accessToken>', '<encryptionKey>', true, true);
 
 $successUrl = str_replace("request.php", "success", $_SERVER['HTTP_REFERER']);
 $failUrl 	= str_replace("request.php", "failed", $_SERVER['HTTP_REFERER']);
@@ -34,7 +34,7 @@ $failUrl 	= str_replace("request.php", "failed", $_SERVER['HTTP_REFERER']);
 $obj->initOrder(generateByMicrotime(), $product_name,  $amount, $successUrl,  $failUrl, 'USD');
 
 // Add Customer
-$obj->addCustomer('Testing', 'test@gmail.com', '9999999999');
+$obj->addCustomer($fname, $email, $contact);
 
 // Add Shipping address
 $obj->addShippingAddress('', '', '', '', '');
@@ -44,8 +44,6 @@ $obj->addBillingAddress('', '', '', '', '');
 
 //Enable if require custom fields
 $obj->setCustomFields(array('udf_1' => 'Some Dummy text'));
-//echo "<pre>";
-//print_r($obj);exit;
 //Render template and submit the form
 echo $obj->submit();
 
