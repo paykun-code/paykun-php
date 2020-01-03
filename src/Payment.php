@@ -10,7 +10,7 @@ require_once ('Errors/ErrorCodes.php');
 require_once ('Errors/ValidationException.php');
 class Payment {
 
-    const GATEWAY_URL_PROD = "https://checkout2.paykun.com/payment";
+    const GATEWAY_URL_PROD = "https://checkout.paykun.com/payment";
     const GATEWAY_URL_DEV = "https://sandbox.paykun.com/payment";
     const PAGE_TITLE = "Processing Payment...";
 
