@@ -10,7 +10,7 @@ require_once ('Errors/ErrorCodes.php');
 require_once ('Errors/ValidationException.php');
 class Payment {
 
-    const GATEWAY_URL_PROD = "https://checkout.paykun.com/payment";
+    const GATEWAY_URL_PROD = "https://checkout2.paykun.com/payment";
     const GATEWAY_URL_DEV = "https://sandbox.paykun.com/payment";
     const PAGE_TITLE = "Processing Payment...";
 
@@ -110,11 +110,6 @@ class Payment {
         if (Validator::VALIDATE_PURPOSE($purpose)) {
             throw new Errors\ValidationException(ErrorCodes::INVALID_PURPOSE_STRING,
                 ErrorCodes::INVALID_PURPOSE_CODE, null);
-        }
-
-        if (Validator::VALIDATE_AMOUNT($amount)) {
-            throw new Errors\ValidationException(ErrorCodes::INVALID_AMOUNT_STRING,
-                ErrorCodes::INVALID_AMOUNT_CODE, null);
         }
 
         $this->orderId      = $orderId;
