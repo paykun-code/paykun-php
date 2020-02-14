@@ -46,6 +46,7 @@ class Payment {
     public $udf_3;
     public $udf_4;
     public $udf_5;
+    private $isWebView;
 
     /**
      * Payment constructor.
@@ -56,7 +57,7 @@ class Payment {
      * @throws Errors\ValidationException
      */
 
-    public function __construct($mid, $accessToken, $encKey, $isLive = true, $isCustomTemplate = false) {
+    public function __construct($mid, $accessToken, $encKey, $isLive = true, $isCustomTemplate = false, $isWebView=false) {
 
 //        if (Validator::VALIDATE_MERCHANT_ID($mid)) {
 //            throw new Errors\ValidationException(ErrorCodes::INVALID_MERCHANT_ID_STRING,
@@ -85,7 +86,7 @@ class Payment {
 
             $this->twig = new \Twig_Environment($loader);
         }
-
+        $this->isWebView = $isWebView;
 
     }
 
@@ -289,10 +290,15 @@ class Payment {
         $formData['encrypted_request']  = $encData;
         $formData['merchant_id']        = $this->merchantId;
         $formData['access_token']       = $this->accessToken;
+
+        $extraParam = "";
+        if($this->isWebView) {
+            $extraParam = "?isWebView=true";
+        }
         if ($this->isLive) {
-            $formData['gateway_url'] = self::GATEWAY_URL_PROD;
+            $formData['gateway_url'] = self::GATEWAY_URL_PROD.$extraParam;
         } else {
-            $formData['gateway_url'] = self::GATEWAY_URL_DEV;
+            $formData['gateway_url'] = self::GATEWAY_URL_DEV.$extraParam;
         }
         
         $formData['pageTitle'] = self::PAGE_TITLE;
