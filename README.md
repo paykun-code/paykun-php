@@ -30,7 +30,8 @@ use Paykun\Checkout\Payment;
 $obj = new Payment('<merchantId>', '<accessToken>', '<encryptionKey>');
 
 // Initializing Order
-$obj->initOrder('<orderId>', '<Purpose or ProductName>', "<amount>", '<successUrl.example.com>',  '<failUrl.example.com>');
+// default currency is 'INR'
+$obj->initOrder('<orderId>', '<Purpose or ProductName>', "<amount>", '<successUrl.example.com>',  '<failUrl.example.com>', 'INR');
 
 // Add Customer
 $obj->addCustomer('<customerName>', '<customerEmail>', '<customerContactNo>');
@@ -73,7 +74,8 @@ require 'src/Crypto.php';
 $obj = new \Paykun\Checkout\Payment('<merchantId>', '<accessToken>', '<encryptionKey>', true, true);
 
 // Initializing Order
-$obj->initOrder('<orderId>', '<Purpose or ProductName>', "<amount>", '<successUrl.example.com>',  '<failUrl.example.com>');
+// default currency is 'INR'
+$obj->initOrder('<orderId>', '<Purpose or ProductName>', "<amount>", '<successUrl.example.com>',  '<failUrl.example.com>', 'INR');
 
 // Add Customer
 $obj->addCustomer('<customerName>', '<customerEmail>', '<customerContactNo>');
