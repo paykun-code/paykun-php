@@ -40,7 +40,7 @@ $obj->addCustomer('<customerName>', '<customerEmail>', '<customerContactNo>');
 $obj->addShippingAddress('<country>', '<state>', '<city>', '<postalCode>', '<fullAddress>');
 
 // Add Billing Address
-$obj->addBillingAddress('<country>', '<state>', '<city>', '<postalCode>', '<fullAddress>);
+$obj->addBillingAddress('<country>', '<state>', '<city>', '<postalCode>', '<fullAddress>');
 
 echo $obj->submit();
 
