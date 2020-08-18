@@ -47,7 +47,7 @@ class Payment {
     public $udf_4;
     public $udf_5;
     private $isWebView;
-
+    private $webHook = null;
     /**
      * Payment constructor.
      * @param string $mid           => Id of the Merchant
@@ -144,6 +144,17 @@ class Payment {
     }
 
 
+    public function setWebhook($url) {
+
+        if (filter_var($url, FILTER_VALIDATE_URL) === FALSE) {
+            throw (new \Exception('INVALID_URL', 401));
+        } else {
+            $this->webHook = $url;
+        }
+
+    }
+
+
     /**
      * @param string $country
      * @param string $state
@@ -208,9 +219,9 @@ class Payment {
         if (
             $this->isPassedValidationForConstructor &&
             $this->isPassedValidationForInitOrder &&
-            $this->isPassedValidationForCustomer &&
+            $this->isPassedValidationForCustomer /*&&
             $this->isPassedValidationForShipping &&
-            $this->isPassedValidationForBilling
+            $this->isPassedValidationForBilling*/
         ) {
 
             $dataArray                      = array();
@@ -238,6 +249,8 @@ class Payment {
             $dataArray['udf_4']             = $this->udf_4 ? $this->udf_4 : '';
             $dataArray['udf_5']             = $this->udf_5 ? $this->udf_5 : '';
             $dataArray['currency']          = $this->currency;
+            $dataArray['webhook']          = $this->webHook;
+
             $encryptedData = $this->encryptData($dataArray);
             return $this->createForm($encryptedData);
 
@@ -290,7 +303,6 @@ class Payment {
         $formData['encrypted_request']  = $encData;
         $formData['merchant_id']        = $this->merchantId;
         $formData['access_token']       = $this->accessToken;
-
         $extraParam = "";
         if($this->isWebView) {
             $extraParam = "?isWebView=true";
