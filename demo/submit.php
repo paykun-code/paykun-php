@@ -31,7 +31,7 @@ $successUrl = str_replace("request.php", "success", $_SERVER['HTTP_REFERER']);
 $failUrl 	= str_replace("request.php", "failed", $_SERVER['HTTP_REFERER']);
 
 // Initializing Order
-$obj->initOrder(generateByMicrotime(), $product_name,  $amount, $successUrl,  $failUrl, 'USD');
+$obj->initOrder(generateByMicrotime(), $product_name,  $amount, $successUrl,  $failUrl, 'IND');
 
 // Add Customer
 $obj->addCustomer($fname, $email, $contact);
