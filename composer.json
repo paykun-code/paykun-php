@@ -5,7 +5,7 @@
     "description": "PayKun Checkout library which can be used to initiate payment",
     "require": {
         "php": ">=5.3.0",
-        "twig/twig": "^2.0"
+        "twig/twig": "^3.11"
     },
     "license": "MIT",
     "authors": [
